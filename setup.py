@@ -2,8 +2,7 @@ from setuptools import setup, find_packages
 from os.path import join
 
 name = 'flint.menu'
-path = name.split('.') + ['version.txt']
-version = open(join(*path)).read().strip()
+version = "0.1"
 readme = open("README.txt").read()
 history = ""
 
