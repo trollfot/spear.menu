@@ -3,29 +3,14 @@
 from urllib import quote_plus
 from Acquisition import aq_inner
 from zope.i18n import translate
-from zope.interface import Interface
 from zope.component import getMultiAdapter, queryMultiAdapter, queryUtility
-from zope.app.container.interfaces import IAdding
-from zope.publisher.interfaces.http import IHTTPRequest
 from flint.content.interfaces import ICarvingWorkshop
 from plone.i18n.normalizer.interfaces import IIDNormalizer
 from plone.app.content.browser import folderfactories as plone
 
 
 class FlintFolderFactories(plone.FolderFactoriesView):
-    """The folder_factories view - show addable types
-    Flint modified to take care of generic factories,
-    just like zope does.
-    """
-    def _factory_url(self, name, factory):
 
-        if factory is None:
-            return None
-
-        if ICarvingWorkshop.implementedBy(factory):
-            return "+/flint.add=%s" % name
-
-    
     def addable_types(self, include=None):
         context = aq_inner(self.context)
         request = self.request
