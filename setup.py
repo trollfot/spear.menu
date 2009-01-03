@@ -1,14 +1,14 @@
 from setuptools import setup, find_packages
 from os.path import join
 
-name = 'flint.menu'
+name = 'spear.menu'
 version = "0.1"
 readme = open("README.txt").read()
 history = ""
 
 setup(name = name,
       version = version,
-      description = 'Plone menu for flint',
+      description = 'Plone menu for spear',
       long_description = readme[readme.find('\n\n'):] + '\n' + history,
       keywords = 'plone CMS zope',
       author = 'Souheil Chelfouh',
@@ -17,14 +17,14 @@ setup(name = name,
       download_url = '',
       license = 'GPL',
       packages = find_packages(),
-      namespace_packages = ['flint'],
+      namespace_packages = ['spear'],
       include_package_data = True,
       platforms = 'Any',
       zip_safe = False,
       install_requires=[
           'setuptools',
           'five.grok',
-          'flint.content'
+          'spear.content'
       ],
       classifiers = [
         'Development Status :: 4 - Beta',

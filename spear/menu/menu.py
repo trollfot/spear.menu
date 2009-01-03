@@ -4,12 +4,12 @@ from urllib import quote_plus
 from Acquisition import aq_inner
 from zope.i18n import translate
 from zope.component import getMultiAdapter, queryMultiAdapter, queryUtility
-from flint.content.interfaces import ICarvingWorkshop
+from spear.content.interfaces import ICarvingWorkshop
 from plone.i18n.normalizer.interfaces import IIDNormalizer
 from plone.app.content.browser import folderfactories as plone
 
 
-class FlintFolderFactories(plone.FolderFactoriesView):
+class SpearFactories(plone.FolderFactoriesView):
 
     def addable_types(self, include=None):
         context = aq_inner(self.context)
@@ -42,7 +42,7 @@ class FlintFolderFactories(plone.FolderFactoriesView):
                     else:
                         workshop = queryUtility(ICarvingWorkshop, factory_name)
                         url = (workshop and
-                               "+flint/flint.add=%s" % factory_name or None)
+                               "+spear/spear.add=%s" % factory_name or None)
 
                 if url is None:
                     url = 'createObject?type_name=%s' % quote_plus(typeId)
