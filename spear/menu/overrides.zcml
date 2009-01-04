@@ -1,16 +1,19 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
-    xmlns:browser="http://namespaces.zope.org/browser">
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:grok="http://namespaces.zope.org/grok">
 
-    <!-- Folder factories -->
-    <configure package="plone.app.content.browser">
-      <browser:page
-	  for="*"
-	  name="folder_factories"
-	  class="spear.menu.menu.SpearFactories"
-	  template="folderfactories.pt"
-	  permission="cmf.AddPortalContent"
-	  />
-    </configure>
+  <grok:grok package=".menu" />
+
+  <!-- Folder factories -->
+  <configure package="plone.app.content.browser">
+    <browser:page
+	for="*"
+	name="folder_factories"
+	class="spear.menu.menu.SpearFactories"
+	template="folderfactories.pt"
+	permission="cmf.AddPortalContent"
+	/>
+  </configure>
 
 </configure>

@@ -1,12 +1,48 @@
 # -*- coding: utf-8 -*-
 
+from five import grok
 from urllib import quote_plus
 from Acquisition import aq_inner
 from zope.i18n import translate
+from zope.interface import Interface
 from zope.component import getMultiAdapter, queryMultiAdapter, queryUtility
 from spear.content.interfaces import ICarvingWorkshop
 from plone.i18n.normalizer.interfaces import IIDNormalizer
 from plone.app.content.browser import folderfactories as plone
+from plone.app import contentmenu as plone_menu 
+
+
+class SpearMenu(plone_menu.menu.FactoriesSubMenuItem, grok.MultiAdapter):
+    grok.adapts(Interface, Interface)
+    grok.name("plone.contentmenu.factories")
+    grok.provides(plone_menu.interfaces.IContentMenuItem)
+    
+    @property
+    def action(self):
+        addContext = self._addContext()
+        if self._hideChildren():
+            (addContext, fti) = self._itemsToAdd()[0]
+            baseUrl = addContext.absolute_url()
+            addingview = queryMultiAdapter((addContext,
+                                            self.request), name='+')
+            if addingview is not None and not fti.product:
+                addview = queryMultiAdapter((addingview, self.request),
+                                            name=fti.factory)
+                if addview is not None:
+                    return '%s/+/%s' % (baseUrl, fti.factory,)
+                else:
+                    workshop = queryUtility(ICarvingWorkshop, fti.factory)
+                    url = (workshop and
+                           "%s/+spear/spear.add=%s" % (baseUrl, fti.factory)
+                           or None)
+                    if url is not None:
+                        return url
+                
+            return ('%s/createObject?type_name=%s' %
+                    (baseUrl, quote_plus(fti.getId())))
+        else:
+            return ('%s/folder_factories' %
+                    self.context_state.folder().absolute_url())
 
 
 class SpearFactories(plone.FolderFactoriesView):

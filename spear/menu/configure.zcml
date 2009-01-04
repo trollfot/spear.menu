@@ -2,7 +2,8 @@
 	   xmlns:grok="http://namespaces.zope.org/grok">
 
   <include package="plone.app.content" />
-  <grok:grok package="." />
+  <include package="plone.app.contentmenu" />
+  <grok:grok package=".adding" />
   <includeOverrides file="overrides.zcml" />
 
 </configure>
