@@ -6,7 +6,7 @@ from Acquisition import aq_inner
 from zope.i18n import translate
 from zope.interface import Interface
 from zope.component import getMultiAdapter, queryMultiAdapter, queryUtility
-from spear.content.interfaces import ICarvingWorkshop
+from spear.content.interfaces import IFactory
 from plone.i18n.normalizer.interfaces import IIDNormalizer
 from plone.app.content.browser import folderfactories as plone
 from plone.app import contentmenu as plone_menu 
@@ -31,7 +31,7 @@ class SpearMenu(plone_menu.menu.FactoriesSubMenuItem, grok.MultiAdapter):
                 if addview is not None:
                     return '%s/+/%s' % (baseUrl, fti.factory,)
                 else:
-                    workshop = queryUtility(ICarvingWorkshop, fti.factory)
+                    workshop = queryUtility(IFactory, fti.factory)
                     url = (workshop and
                            "%s/+spear/spear.add=%s" % (baseUrl, fti.factory)
                            or None)
@@ -76,7 +76,7 @@ class SpearFactories(plone.FolderFactoriesView):
                     if factory is not None:
                         url = "+/%s" % factory_name
                     else:
-                        workshop = queryUtility(ICarvingWorkshop, factory_name)
+                        workshop = queryUtility(IFactory, factory_name)
                         url = (workshop and
                                "+spear/spear.add=%s" % factory_name or None)
 

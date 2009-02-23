@@ -16,7 +16,7 @@ from zope.publisher import interfaces as zp
 from zope.app.container.interfaces import IAdding
 
 
-class SpearCarver(SimpleItem, BasicAdding, grok.MultiAdapter):
+class SpearAddingView(SimpleItem, BasicAdding, grok.MultiAdapter):
     grok.name('+spear')
     grok.adapts(IFolderish, zp.http.IHTTPRequest)
     grok.provides(IAdding)
