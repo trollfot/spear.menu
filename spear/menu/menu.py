@@ -33,7 +33,8 @@ class SpearMenu(plone_menu.menu.FactoriesSubMenuItem, grok.MultiAdapter):
                 else:
                     workshop = queryUtility(IFactory, fti.factory)
                     url = (workshop and
-                           "%s/+spear/spear.add=%s" % (baseUrl, fti.factory)
+                           "%s/+spear/%s=%s" % (
+                               baseUrl, workshop.addform, fti.factory)
                            or None)
                     if url is not None:
                         return url
