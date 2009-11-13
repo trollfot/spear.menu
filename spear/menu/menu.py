@@ -9,14 +9,14 @@ from zope.component import getMultiAdapter, queryMultiAdapter, queryUtility
 from spear.content.interfaces import IFactory
 from plone.i18n.normalizer.interfaces import IIDNormalizer
 from plone.app.content.browser import folderfactories as plone
-from plone.app import contentmenu as plone_menu 
+from plone.app import contentmenu as plone_menu
 
 
 class SpearMenu(plone_menu.menu.FactoriesSubMenuItem, grok.MultiAdapter):
     grok.adapts(Interface, Interface)
     grok.name("plone.contentmenu.factories")
     grok.provides(plone_menu.interfaces.IContentMenuItem)
-    
+
     @property
     def action(self):
         addContext = self._addContext()
@@ -38,7 +38,7 @@ class SpearMenu(plone_menu.menu.FactoriesSubMenuItem, grok.MultiAdapter):
                            or None)
                     if url is not None:
                         return url
-                
+
             return ('%s/createObject?type_name=%s' %
                     (baseUrl, quote_plus(fti.getId())))
         else:
@@ -52,13 +52,13 @@ class SpearFactories(plone.FolderFactoriesView):
         context = aq_inner(self.context)
         request = self.request
         results = []
-        
+
         portal_state = getMultiAdapter((context, request),
                                        name='plone_portal_state')
         portal_url = portal_state.portal_url()
         addContext = self.add_context()
         baseUrl = addContext.absolute_url()
-        
+
         allowedTypes = plone._allowedTypes(request, addContext)
         exclude = addContext.getNotAddableTypes()
 
@@ -79,7 +79,9 @@ class SpearFactories(plone.FolderFactoriesView):
                     else:
                         workshop = queryUtility(IFactory, factory_name)
                         url = (workshop and
-                               "+spear/spear.add=%s" % factory_name or None)
+                               "%s/+spear/%s=%s" % (
+                                baseUrl, workshop.addform, t.factory)
+                               or None)
 
                 if url is None:
                     url = 'createObject?type_name=%s' % quote_plus(typeId)
