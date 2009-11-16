@@ -79,8 +79,8 @@ class SpearFactories(plone.FolderFactoriesView):
                     else:
                         workshop = queryUtility(IFactory, factory_name)
                         url = (workshop and
-                               "%s/+spear/%s=%s" % (
-                                baseUrl, workshop.addform, t.factory)
+                               "+spear/%s=%s" % (
+                                   workshop.addform, t.factory)
                                or None)
 
                 if url is None:
