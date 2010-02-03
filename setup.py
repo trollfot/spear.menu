@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 from os.path import join
 
 name = 'spear.menu'
-version = "0.1a"
+version = "0.1"
 readme = open("README.txt").read()
 history = ""
 
@@ -24,7 +24,14 @@ setup(name = name,
       install_requires=[
           'setuptools',
           'five.grok',
-          'spear.content'
+          'spear.content',
+          'plone.app.content',
+          'plone.app.contentmenu',
+          'zope.component',
+          'zope.interface',
+          'zope.publisher',
+          'zope.i18n',
+          'plone.i18n',
       ],
       classifiers = [
         'Development Status :: 4 - Beta',

@@ -1,8 +1,11 @@
 <configure xmlns="http://namespaces.zope.org/zope"
-	   xmlns:grok="http://namespaces.zope.org/grok">
+           xmlns:grok="http://namespaces.zope.org/grok">
 
+  <include package="five.grok" />
   <include package="plone.app.content" />
   <include package="plone.app.contentmenu" />
+  <include package="spear.content" />
+
   <grok:grok package=".adding" />
   <includeOverrides file="overrides.zcml" />
 

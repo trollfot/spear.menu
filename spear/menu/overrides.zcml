@@ -8,12 +8,12 @@
   <!-- Folder factories -->
   <configure package="plone.app.content.browser">
     <browser:page
-	for="*"
-	name="folder_factories"
-	class="spear.menu.menu.SpearFactories"
-	template="folderfactories.pt"
-	permission="cmf.AddPortalContent"
-	/>
+       for="*"
+       name="folder_factories"
+       class="spear.menu.menu.SpearFactories"
+       template="folderfactories.pt"
+       permission="cmf.AddPortalContent"
+       />
   </configure>
 
 </configure>
