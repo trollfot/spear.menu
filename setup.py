@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 from os.path import join
 
 name = 'spear.menu'
-version = "0.2dev"
+version = "0.2"
 readme = open("README.txt").read()
 history = ""
 

@@ -1,0 +1,2 @@
+recursive-include spear *.py *.zcml
+include README.txt
